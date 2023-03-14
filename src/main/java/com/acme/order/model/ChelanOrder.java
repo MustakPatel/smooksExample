@@ -15,6 +15,7 @@ public class ChelanOrder {
     private String orderDate;
     private List<String> notes = new ArrayList<>();
     private List<ChelanOrderItem> items = new LinkedList<>();
+    private List<ChelanOrderParty> role = new LinkedList<>();
     private EnumMap<OrderRole, ChelanOrderParty> roles = new EnumMap<>(OrderRole.class);
     private String internalOrderId;
     private String revisionNumber;
@@ -98,6 +99,19 @@ public class ChelanOrder {
         this.items.add(item);
     }
 
+    public List<ChelanOrderParty> getRole() {
+        return role;
+    }
+    public void setRole(ChelanOrderParty role) {
+        this.role.add(role);
+        for (ChelanOrderParty party : this.role) {
+            List<OrderRole> roleList = party.getRole();
+            if (!roleList.isEmpty()) {
+                OrderRole orderRole = roleList.get(0);
+                addRole(orderRole, party);
+            }
+        }
+    }
     public void addRole(OrderRole orderRole, ChelanOrderParty party) {
         this.roles.put(orderRole, party);
     }

@@ -7,6 +7,7 @@
 
     <jb:bean beanId="PurchaseOrder" class="com.acme.order.model.ChelanOrder" createOnElement="com.acme.order.model.PurchaseOrder">
         <jb:wiring beanIdRef="orderItem" property="items"/>
+        <jb:wiring beanIdRef="orderRole" property="role"/>
         <jb:value property="senderId" data="isa/senderId" />
 <!--        <jb:expression property="internalOrderId" execOnElement="transactionSet/com.acme.order.model.TransactionSet/referenceIdentification/com.acme.order.model.ReferenceIdentification" >-->
 <!--            com.acme.order.model.ReferenceIdentification.referenceIdentificationQualifier;-->
@@ -44,6 +45,36 @@
                   decoder="Enum">
             <jb:decodeParam name="enumType">com.acme.order.itrade.QuantityUom</jb:decodeParam>
             <jb:decodeParam name="CA">QTY_CASE</jb:decodeParam>
+        </jb:value>
+    </jb:bean>
+
+    <jb:bean beanId="orderRole" class="com.acme.order.itrade.ChelanOrderParty"  createOnElement="transactionSet/com.acme.order.model.TransactionSet/N1Loop/com.acme.order.model.N1Loop">
+        <jb:value property="role"
+                  data="name/entityIdentifierCode"
+                  decoder="Enum">
+            <jb:decodeParam name="enumType">com.acme.order.itrade.OrderRole</jb:decodeParam>
+            <jb:decodeParam name="BT">BILL_TO</jb:decodeParam>
+            <jb:decodeParam name="BY">BUYER</jb:decodeParam>
+            <jb:decodeParam name="ST">SHIP_TO</jb:decodeParam>
+            <jb:decodeParam name="VN">VENDOR</jb:decodeParam>
+        </jb:value>
+        <jb:value setterMethod="name" data="name/name" />
+        <jb:value setterMethod="nickName" data="additionalNameInformation/com.acme.order.model.AdditionalNameInformation/name" />
+        <jb:value setterMethod="partyIdType" data="name/identificationCodeQualifier" />
+        <jb:value setterMethod="idCode" data="name/identificationCode" />
+        <jb:value setterMethod="address1" data="addressInformation/com.acme.order.model.AddressInformation/addressInformation1" />
+        <jb:value setterMethod="address2" data="addressInformation/com.acme.order.model.AddressInformation/addressInformation2" />
+        <jb:value setterMethod="city" data="geographicLocation/com.acme.order.model.GeographicLocation/cityName" />
+        <jb:value setterMethod="stateProvinceCode" data="geographicLocation/com.acme.order.model.GeographicLocation/stateCode" />
+        <jb:value setterMethod="postalCode" data="geographicLocation/com.acme.order.model.GeographicLocation/postalCode" />
+        <jb:value setterMethod="countryCode" data="geographicLocation/com.acme.order.model.GeographicLocation/countryCode" />
+<!--        <jb:value setterMethod="countryCode" data="adminCommunicationContact/communicationNumberQualifier/countryCode" />-->
+        <jb:value setterMethod="contactMechType"
+                  data="adminCommunicationContact/com.acme.order.model.AdminCommunicationContact/communicationNumberQualifier"
+                  decoder="Enum">
+            <jb:decodeParam name="enumType">com.acme.order.itrade.ContactMechType</jb:decodeParam>
+            <jb:decodeParam name="TE">TELEPHONE</jb:decodeParam>
+            <jb:decodeParam name="EA">EMAIL</jb:decodeParam>
         </jb:value>
     </jb:bean>
 

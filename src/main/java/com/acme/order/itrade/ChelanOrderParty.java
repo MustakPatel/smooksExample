@@ -16,6 +16,15 @@ public class ChelanOrderParty {
     private String countryCode;
     private ContactMechType contactMechType;
     private String contactInfo;
+    private List<OrderRole> role = new ArrayList<>();
+
+    public List<OrderRole> getRole() {
+        return role;
+    }
+
+    public void setRole(OrderRole role) {
+        this.role.add(role);
+    }
 
     public ChelanOrderParty name(String name) {
         this.name = name;
@@ -140,6 +149,7 @@ public class ChelanOrderParty {
                 ", countryCode='" + countryCode + '\'' +
                 ", contactMechType=" + contactMechType +
                 ", contactInfo='" + contactInfo + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

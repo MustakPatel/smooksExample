@@ -60,8 +60,8 @@ public class Main {
         } else if (FobPaymentMethod.FOB == chelanOrder.getFobPaymentMethod()) {
             System.out.println("PaymentMethod::FOB_GROUND");
         }
-//        ChelanOrderParty shipTo = chelanOrder.getRoles().get(OrderRole.SHIP_TO);
-//        System.out.println(shipTo);
+        ChelanOrderParty shipTo = chelanOrder.getRoles().get(OrderRole.SHIP_TO);
+        System.out.println(shipTo);
 //        System.out.println();
 //        System.out.println("Write the modified model to System.out ...");
 //        System.out.println();
