@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medi:edimap xmlns:medi="http://www.milyn.org/schema/edi-message-mapping-1.5.xsd">
+    <medi:description name="Segment Definition For Purchase Order" version="1.0"/>
+    <medi:delimiters segment="~" field="*" component="^"  sub-component=""/>
+    <medi:segments xmltag="PurchaseOrder">
+        <medi:segment segcode="ISA" xmltag="isa"  minOccurs="1" maxOccurs="1">
+            <medi:field xmltag="authorizationInformationQualifier" required="true" />
+            <medi:field xmltag="authorizationInformation" required="true" />
+            <medi:field xmltag="securityInformationQualifier" required="true" />
+            <medi:field xmltag="securityInformation" required="true" />
+            <medi:field xmltag="senderIdentificationQualifier" required="true" />
+            <medi:field xmltag="senderId" required="true" />
+            <medi:field xmltag="receiverIdentificationQualifier" required="true" />
+            <medi:field xmltag="receiverId" required="true" />
+            <medi:field xmltag="interchangeDate" required="true" />
+            <medi:field xmltag="interchangeTime" required="true" />
+            <medi:field xmltag="interchangeControlStandardIdentifier" required="true" />
+            <medi:field xmltag="interchangeControlStandardVersionNumber" required="true" />
+            <medi:field xmltag="interchangeControlNumber" required="true" />
+            <medi:field xmltag="acknowledgmentRequest" required="true" />
+            <medi:field xmltag="usageIndicator" required="true" />
+            <medi:field xmltag="componentElementSeparator" required="true" />
+        </medi:segment>
+        <medi:segment segcode="GS" xmltag="gs" minOccurs="1" maxOccurs="1">
+            <medi:field xmltag="functionalIdentifierCode" required="true" />
+            <medi:field xmltag="applicationSenderCode" required="true" />
+            <medi:field xmltag="applicationReceiverCode" required="true" />
+            <medi:field xmltag="date" required="true" />
+            <medi:field xmltag="time" required="true" />
+            <medi:field xmltag="groupControlNumber" required="true" />
+            <medi:field xmltag="responsibleAgencyCode" required="true" />
+            <medi:field xmltag="versionReleaseIdentifierCode" required="true" />
+        </medi:segment>
+        <medi:segmentGroup xmltag="transactionSet" minOccurs="1" maxOccurs="-1">
+            <medi:segment segcode="ST" xmltag="transactionSetHeader" minOccurs="1" maxOccurs="1">
+                <medi:field xmltag="transactionSetIdentifierCode" required="true" />
+                <medi:field xmltag="transactionSetControlNumber" required="true" />
+            </medi:segment>
+            <medi:segment segcode="BEG" xmltag="beginningSegmentForPO" minOccurs="1" maxOccurs="1">
+                <medi:field xmltag="transactionSetPurposeCode" required="true" />
+                <medi:field xmltag="purchaseOrderTypeCode" required="true" />
+                <medi:field xmltag="purchaseOrderNumber" required="true" />
+                <medi:field xmltag="releaseNumber" />
+                <medi:field xmltag="date" required="true" />
+            </medi:segment>
+            <medi:segment segcode="CUR" xmltag="currency" minOccurs="0" maxOccurs="1">
+                <medi:field xmltag="entityIdentifierCode" required="true" />
+                <medi:field xmltag="currencyCode" required="true" />
+            </medi:segment>
+            <medi:segment segcode="REF" xmltag="referenceIdentification"  minOccurs="0" maxOccurs="-1" truncatable="true">
+                <medi:field xmltag="referenceIdentificationQualifier" required="true" />
+                <medi:field xmltag="referenceIdentificationCode" />
+                <medi:field xmltag="description" />
+            </medi:segment>
+            <medi:segment segcode="FOB" xmltag="freeOnBoard" minOccurs="0" maxOccurs="-1" truncatable="true">
+                <medi:field xmltag="shipmentMethodOfPayment" required="true"/>
+                <medi:field xmltag="locationQualifier" />
+                <medi:field xmltag="description" />
+                <medi:field xmltag="transportationTermsCode" />
+            </medi:segment>
+            <medi:segmentGroup xmltag="sacLoop" minOccurs="0" maxOccurs="25">
+                <medi:segment segcode="SAC" xmltag="servicePromotionAllowanceChargeInformation" minOccurs="0" maxOccurs="1" truncatable="true">
+                    <medi:field xmltag="allowanceChargeIndicator" required="true"/>
+                    <medi:field xmltag="servicePromotionAllowanceChargeCode" />
+                    <medi:field xmltag="agencyQualifierCode" />
+                    <medi:field xmltag="agencyServicePromotionAllowanceChargeCode" />
+                    <medi:field xmltag="amount" />
+                    <medi:field xmltag="allowanceChargePercentQualifier" />
+                    <medi:field xmltag="percent" />
+                    <medi:field xmltag="rate" />
+                    <medi:field xmltag="unitOrBasisForMeasurementCode" />
+                    <medi:field xmltag="quantity" />
+                    <medi:field xmltag="SAC11" />
+                    <medi:field xmltag="allowanceOrChargeMethodOfHandlingCode" />
+                    <medi:field xmltag="SAC13" />
+                    <medi:field xmltag="SAC14" />
+                    <medi:field xmltag="description" />
+                </medi:segment>
+            </medi:segmentGroup>
+            <medi:segment segcode="DTM" xmltag="dateTimeReference"  minOccurs="0" maxOccurs="10" truncatable="true">
+                <medi:field xmltag="dateTimeQualifier" required="true" />
+                <medi:field xmltag="date" />
+            </medi:segment>
+            <medi:segment segcode="TD5" xmltag="carrierDetails" minOccurs="0" maxOccurs="12" truncatable="true">
+                <medi:field xmltag="routingSequenceCode" />
+                <medi:field xmltag="identificationCodeQualifier" />
+                <medi:field xmltag="identificationCode" />
+                <medi:field xmltag="transportationMethod" />
+                <medi:field xmltag="routing" />
+                <medi:field xmltag="transitTimeDirectionQualifier" />
+                <medi:field xmltag="transitTime" />
+            </medi:segment>
+            <medi:segmentGroup xmltag="n9Loop" minOccurs="0" maxOccurs="100">
+                <medi:segment segcode="N9" xmltag="referenceIdentificationN9" minOccurs="0" maxOccurs="1" truncatable="true">
+                    <medi:field xmltag="referenceIdentificationQualifier" required="true" />
+                    <medi:field xmltag="referenceIdentification" />
+                    <medi:field xmltag="freeFormDescription" />
+                </medi:segment>
+                <medi:segment segcode="MSG" xmltag="messageText" minOccurs="0" maxOccurs="100" truncatable="true">
+                    <medi:field xmltag="freeFormMessageText" required="true" />
+                </medi:segment>
+            </medi:segmentGroup>
+            <medi:segmentGroup xmltag="n1Loop" minOccurs="0" maxOccurs="100">
+                <medi:segment segcode="N1" xmltag="name" minOccurs="0" maxOccurs="1" truncatable="true">
+                    <medi:field xmltag="entityIdentifierCode" required="true" />
+                    <medi:field xmltag="name" />
+                    <medi:field xmltag="identificationCodeQualifier" />
+                    <medi:field xmltag="identificationCode" />
+                </medi:segment>
+                <medi:segment segcode="N2" xmltag="additionalNameInformation" minOccurs="0" maxOccurs="2">
+                    <medi:field xmltag="name" required="true" />
+                </medi:segment>
+                <medi:segment segcode="N3" xmltag="addressInformation"  minOccurs="0" maxOccurs="2" truncatable="true">
+                    <medi:field xmltag="addressInformation1" required="true" />
+                    <medi:field xmltag="addressInformation2"/>
+                </medi:segment>
+                <medi:segment segcode="N4" xmltag="geographicLocation" minOccurs="0" maxOccurs="-1" truncatable="true">
+                    <medi:field xmltag="cityName" />
+                    <medi:field xmltag="stateCode" />
+                    <medi:field xmltag="postalCode" />
+                    <medi:field xmltag="countryCode" />
+                </medi:segment>
+                <medi:segment segcode="PER" xmltag="adminCommunicationContact" minOccurs="0" maxOccurs="-1" truncatable="true">
+                    <medi:field xmltag="contactFunctionCode" required="true" />
+                    <medi:field xmltag="name" />
+                    <medi:field xmltag="communicationNumberQualifier" />
+                    <medi:field xmltag="communicationNumber" />
+                </medi:segment>
+            </medi:segmentGroup>
+            <medi:segmentGroup xmltag="po1Loop" minOccurs="1" maxOccurs="100">
+                <medi:segment segcode="PO1" xmltag="baseLineItemData" minOccurs="1" maxOccurs="1" truncatable="true">
+                    <medi:field xmltag="assignedIdentification" />
+                    <medi:field xmltag="quantityOrdered" />
+                    <medi:field xmltag="unitOrBasisForMeasurementCode" required="true"/>
+                    <medi:field xmltag="unitPrice" />
+                    <medi:field xmltag="basisOfUnitPriceCode" />
+                    <medi:field xmltag="productOrServiceIdQualifier1" />
+                    <medi:field xmltag="productOrServiceId1" />
+                    <medi:field xmltag="productOrServiceIdQualifier2" />
+                    <medi:field xmltag="productOrServiceId2" />
+                    <medi:field xmltag="productOrServiceIdQualifier3" />
+                    <medi:field xmltag="productOrServiceId3" />
+                    <medi:field xmltag="productOrServiceIdQualifier4" />
+                    <medi:field xmltag="productOrServiceId4" />
+                    <medi:field xmltag="productOrServiceIdQualifier5" />
+                    <medi:field xmltag="productOrServiceId5" />
+                </medi:segment>
+                <medi:segment segcode="MEA" xmltag="measurements" minOccurs="0" maxOccurs="40" truncatable="true">
+                    <medi:field xmltag="MEA01" />
+                    <medi:field xmltag="measurementQualifier" />
+                    <medi:field xmltag="measurementValue" />
+                    <medi:field xmltag="compositeUnitOrMeasure" >
+                        <medi:component xmltag="unitOrBasisForMeasurementCode" required="true" />
+                    </medi:field>
+                </medi:segment>
+                <medi:segmentGroup xmltag="pidLoop" minOccurs="1" maxOccurs="100">
+                    <medi:segment segcode="PID" xmltag="productItemDescription" minOccurs="0" maxOccurs="1" truncatable="true">
+                        <medi:field xmltag="itemDescriptionType" required="true" />
+                        <medi:field xmltag="PID02" />
+                        <medi:field xmltag="PID03" />
+                        <medi:field xmltag="PID04" />
+                        <medi:field xmltag="description" />
+                    </medi:segment>
+                </medi:segmentGroup>
+                <medi:segment segcode="P04" xmltag="itemPhysicalDetails" minOccurs="0" maxOccurs="-1">
+                    <medi:field xmltag="innerPack"/>
+                </medi:segment>
+                <medi:segmentGroup xmltag="sacLoop2" minOccurs="0" maxOccurs="25">
+                    <medi:segment segcode="SAC" xmltag="servicePromotionAllowanceChargeInformationSacLoop" minOccurs="0" maxOccurs="1" truncatable="true">
+                        <medi:field xmltag="allowanceChargeIndicator" required="true"/>
+                        <medi:field xmltag="servicePromotionAllowanceChargeCode" />
+                        <medi:field xmltag="SAC03" />
+                        <medi:field xmltag="SAC04" />
+                        <medi:field xmltag="amount" />
+                        <medi:field xmltag="SAC06" />
+                        <medi:field xmltag="SAC07" />
+                        <medi:field xmltag="rate" />
+                        <medi:field xmltag="unitOrBasisForMeasurementCode" />
+                        <medi:field xmltag="quantity" />
+                        <medi:field xmltag="SAC11" />
+                        <medi:field xmltag="allowanceOrChargeMethodOfHandlingCode" />
+                        <medi:field xmltag="SAC13" />
+                        <medi:field xmltag="SAC14" />
+                        <medi:field xmltag="description" />
+                    </medi:segment>
+                </medi:segmentGroup>
+                <medi:segmentGroup xmltag="n9Loop2" minOccurs="0" maxOccurs="100">
+                    <medi:segment segcode="N9" xmltag="referenceIdentificationN9S" minOccurs="0" maxOccurs="1" truncatable="true">
+                        <medi:field xmltag="referenceIdentificationQualifier" required="true" />
+                        <medi:field xmltag="referenceIdentification" />
+                    </medi:segment>
+                    <medi:segment segcode="MSG" xmltag="messageText" minOccurs="0" maxOccurs="1000" truncatable="true">
+                        <medi:field xmltag="freeFormMessageText" required="true" />
+                    </medi:segment>
+                </medi:segmentGroup>
+            </medi:segmentGroup>
+            <medi:segmentGroup xmltag="cttLoop" minOccurs="1" maxOccurs="1">
+                <medi:segment segcode="CTT" xmltag="transactionTotals" minOccurs="0" maxOccurs="1" truncatable="true">
+                    <medi:field xmltag="numberOfLineItems" required="true" />
+                    <medi:field xmltag="hashTotal" />
+                    <medi:field xmltag="weight" />
+                    <medi:field xmltag="unitOrBasisForMeasurementCodeWt" />
+                    <medi:field xmltag="volume" />
+                    <medi:field xmltag="unitOrBasisForMeasurementCodeVol" />
+                </medi:segment>
+            </medi:segmentGroup>
+            <medi:segment segcode="SE" xmltag="transactionSetTrailer" minOccurs="1" maxOccurs="1">
+                <medi:field xmltag="numberOfIncludedSegments" required="true" />
+                <medi:field xmltag="transactionSetControlNumber" required="true" />
+            </medi:segment>
+        </medi:segmentGroup>
+        <medi:segment segcode="GE" xmltag="geTrailer" minOccurs="1" maxOccurs="1">
+            <medi:field xmltag="numberOfTransactionSetIncluded" required="true" />
+            <medi:field xmltag="groupControlNumber" required="true" />
+        </medi:segment>
+        <medi:segment segcode="IEA" xmltag="ieaTrailer" minOccurs="1" maxOccurs="1">
+            <medi:field xmltag="numberOfIncludedFunctionalGroups" required="true" />
+            <medi:field xmltag="controlNumber" required="true" />
+        </medi:segment>
+    </medi:segments>
+</medi:edimap>
