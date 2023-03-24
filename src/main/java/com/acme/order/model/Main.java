@@ -27,8 +27,9 @@ public class Main {
         // Bind the EDI message stream data into the EJC generated Order model...
         PurchaseOrder purchaseOrder = purchaseOrderFactory.fromEDI(ediStream);
         System.out.println();
-        System.out.println("Input EDI Message:");
+        System.out.println("======================Input EDI Message=====================");
         System.out.println(ediMessage);
+        System.out.println("============================================================");
 
         System.out.println();
         System.out.println("Populated EJC Generated Model:");
@@ -37,31 +38,33 @@ public class Main {
             List<Po1Loop> po1LoopList =  transactionSet.getPo1Loop();
             for (Po1Loop po1Loop : po1LoopList) {
                 BaseLineItemData itemData = po1Loop.getBaseLineItemData();
-                System.out.println("Populated EJC Generated Model for order item:");
+                System.out.println("Populated EJC Generated Model data for order item:");
                 System.out.println("assignedIdentification: " + itemData.getAssignedIdentification());
                 System.out.println("quantityOrdered: " + itemData.getQuantityOrdered());
                 System.out.println("unitOrBasisForMeasurementCode: " + itemData.getUnitOrBasisForMeasurementCode());
                 System.out.println("unitPrice: " + itemData.getUnitPrice());
-                System.out.println("========================================");
+                System.out.println("=================================================");
                 System.out.println();
             }
         }
 
         ChelanOrder chelanOrder = runSmooksTransform(purchaseOrder);
+        System.out.println("==============ChelanOrder Java Object Graph===============");
         System.out.println(chelanOrder.toString());
-        if (OrderPurpose.ORIGINAL == chelanOrder.getPurpose()) {
-            System.out.println("Purpose:: ORIGINAL");
-        }else {
-            System.out.println("Purpose:: REPLACE");
-        }
+        System.out.println("==========================================================\n\n");
+//        if (OrderPurpose.ORIGINAL == chelanOrder.getPurpose()) {
+//            System.out.println("Purpose:: ORIGINAL");
+//        }else {
+//            System.out.println("Purpose:: REPLACE");
+//        }
 
-        if (FobPaymentMethod.DELIVERED == chelanOrder.getFobPaymentMethod()) {
-            System.out.println("PaymentMethod::DELIVERED_GROUND");
-        } else if (FobPaymentMethod.FOB == chelanOrder.getFobPaymentMethod()) {
-            System.out.println("PaymentMethod::FOB_GROUND");
-        }
-        ChelanOrderParty shipTo = chelanOrder.getRoles().get(OrderRole.SHIP_TO);
-        System.out.println(shipTo);
+//        if (FobPaymentMethod.DELIVERED == chelanOrder.getFobPaymentMethod()) {
+//            System.out.println("PaymentMethod::DELIVERED_GROUND");
+//        } else if (FobPaymentMethod.FOB == chelanOrder.getFobPaymentMethod()) {
+//            System.out.println("PaymentMethod::FOB_GROUND");
+//        }
+//        ChelanOrderParty shipTo = chelanOrder.getRoles().get(OrderRole.SHIP_TO);
+//        System.out.println(shipTo);
 //        System.out.println();
 //        System.out.println("Write the modified model to System.out ...");
 //        System.out.println();
@@ -75,6 +78,7 @@ public class Main {
 //        }
     }
 
+//    runSmookTransform use for JAVA TO JAVA binding
     public static ChelanOrder runSmooksTransform(PurchaseOrder srcOrder) throws SAXException, IOException {
     Smooks smooks = new Smooks("smooks-config.xml");
     ExecutionContext executionContext = smooks.createExecutionContext();
@@ -88,7 +92,9 @@ public class Main {
     executionContext.setEventListener(new HtmlReportGenerator("runtime/report/report.html"));
 
     smooks.filterSource(executionContext, source, result);
-
-    return (ChelanOrder) result.getBean("PurchaseOrder");
+        System.out.println("==============JAVA as XML=============");
+        System.out.println(result.toString());
+        System.out.println("======================================\n\n");
+        return (ChelanOrder) result.getBean("PurchaseOrder");
 }
 }

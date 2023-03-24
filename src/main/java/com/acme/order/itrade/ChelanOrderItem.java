@@ -111,19 +111,8 @@ public class ChelanOrderItem {
 
     @Override
     public String toString() {
-        StringBuilder outputBuffer = new StringBuilder();
-        outputBuffer.append("[");
-        outputBuffer.append("[lineId,").append(this.lineId == null ? "null" : this.lineId).append("],");
-        outputBuffer.append("[itemSeqId,").append(this.itemSeqId == null ? "null" : this.itemSeqId).append("],");
-        outputBuffer.append("[quantity,").append(this.quantity == null ? "null" : this.quantity).append("],");
-        outputBuffer.append("[quantityUom,").append(this.quantityUom == null ? "null" : this.quantityUom).append("],");
-        outputBuffer.append("[unitPrice,").append(this.unitPrice == null ? "null" : this.unitPrice).append("],");
-        outputBuffer.append("[sku,").append(this.sku == null ? "null" : this.sku).append("],");
-        outputBuffer.append("[buyerSku,").append(this.buyerSku == null ? "null" : this.buyerSku).append("],");
-        outputBuffer.append("[description,").append(this.description == null ? "null" : this.description).append("],");
-        outputBuffer.append("[shipFromParty,").append(this.shipFromParty == null ? "null" : this.shipFromParty).append("]");
-        outputBuffer.append("]");
-        return outputBuffer.toString();
+        return "lineId=" + lineId + ", itemSeqId=" + itemSeqId + ", quantity=" + quantity + ", quantityUom=" + quantityUom + ", unitPrice=" + unitPrice + ", sku=" + sku +
+                ", buyerSku=" + buyerSku + ", description=" + description +", shipFromParty=" + shipFromParty;
     }
 
 }

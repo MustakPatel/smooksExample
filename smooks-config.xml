@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
                       xmlns:core="http://www.milyn.org/xsd/smooks/smooks-core-1.4.xsd"
-                      xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.2.xsd">
-
-    <core:filterSettings type="SAX" />
+                      xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.5.xsd">
 
     <jb:bean beanId="PurchaseOrder" class="com.acme.order.model.ChelanOrder" createOnElement="com.acme.order.model.PurchaseOrder">
         <jb:wiring beanIdRef="orderItem" property="items"/>
         <jb:wiring beanIdRef="orderRole" property="role"/>
+        <jb:wiring beanIdRef="orderIdentification" property="identifications"/>
         <jb:value property="senderId" data="isa/senderId" />
 <!--        <jb:expression property="internalOrderId" execOnElement="transactionSet/com.acme.order.model.TransactionSet/referenceIdentification/com.acme.order.model.ReferenceIdentification" >-->
 <!--            com.acme.order.model.ReferenceIdentification.referenceIdentificationQualifier;-->
@@ -76,6 +75,10 @@
             <jb:decodeParam name="TE">TELEPHONE</jb:decodeParam>
             <jb:decodeParam name="EA">EMAIL</jb:decodeParam>
         </jb:value>
+    </jb:bean>
+    <jb:bean beanId="orderIdentification" class="com.acme.order.itrade.ReferenceIdentification" createOnElement="transactionSet/com.acme.order.model.TransactionSet/referenceIdentification/com.acme.order.model.ReferenceIdentification">
+        <jb:value setterMethod="setReferenceIdentificationQualifier" data="referenceIdentificationQualifier" />
+        <jb:value setterMethod="setReferenceIdentificationCode" data="referenceIdentificationCode" />
     </jb:bean>
 
 

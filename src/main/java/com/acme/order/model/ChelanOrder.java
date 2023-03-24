@@ -1,6 +1,7 @@
 package com.acme.order.model;
 
 import com.acme.order.itrade.*;
+import com.acme.order.itrade.ReferenceIdentification;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -20,7 +21,7 @@ public class ChelanOrder {
     private String internalOrderId;
     private String revisionNumber;
     private String internalRevisionNumber;
-
+    private List<ReferenceIdentification> identifications = new LinkedList<>();
     public FobPaymentMethod getFobPaymentMethod() {
         return fobPaymentMethod;
     }
@@ -120,21 +121,54 @@ public class ChelanOrder {
         return roles;
     }
 
+    public void setIdentifications(ReferenceIdentification identifications) {
+        this.identifications.add(identifications);
+        for (ReferenceIdentification identification : this.identifications) {
+            System.out.println("");
+            setIdentity(identification);
+        }
+    }
+        public void setIdentity(ReferenceIdentification id){
+            System.out.println("list::" + id);
+                if ("IL".equals(id.getReferenceIdentificationQualifier())) {
+                    this.internalOrderId = id.getReferenceIdentificationCode();
+                }
+                if ("YB".equals(id.getReferenceIdentificationQualifier())) {
+                    this.internalRevisionNumber = id.getReferenceIdentificationCode();
+                }
+                if ("ZI".equals(id.getReferenceIdentificationQualifier())) {
+                    this.revisionNumber = id.getReferenceIdentificationCode();
+                }
+            }
+
+
 
     @Override
     public String toString() {
-        return "ChelanOrder{" +
-                "purpose=" + purpose +
-                ", senderId='" + senderId + '\'' +
-                ", customerOrderId='" + customerOrderId + '\'' +
-                ", fobPaymentMethod=" + fobPaymentMethod +
-                ", orderDate='" + orderDate + '\'' +
-                ", notes=" + notes +
-                ", items=" + items +
-                ", roles=" + roles +
-                ", internalOrderId='" + internalOrderId + '\'' +
-                ", revisionNumber='" + revisionNumber + '\'' +
-                ", internalRevisionNumber='" + internalRevisionNumber + '\'' +
-                '}';
+        StringBuffer desc = new StringBuffer();
+        desc.append("Order Header: \n");
+        desc.append("\tpurpose: " + purpose + "\n");
+        desc.append("\tinternalOrderId: " +internalOrderId + "\n");
+        desc.append("\trevisionNumber: " +revisionNumber + "\n");
+        desc.append("\tinternalRevisionNumber: " +internalRevisionNumber + "\n");
+        desc.append("\tsenderId: " +senderId + "\n");
+        desc.append("\tcustomerOrderId: " +customerOrderId + "\n");
+        desc.append("\tfobPaymentMethod: " +fobPaymentMethod + "\n");
+        desc.append("\torderDate: " +orderDate + "\n");
+        desc.append("\tOrder Notes: \n");
+        for(int i = 0; i < notes.size(); i++) {
+            desc.append("\t" + "(" + i +  "): " + notes.get(i)).append("\n");
+        }
+        desc.append("Order Items: \n");
+        for(int i = 0; i < items.size(); i++) {
+            desc.append("\t" + "(" + i +  "): " + items.get(i)).append("\n");
+        }
+        desc.append("Order Roles: \n");
+        desc.append(roles);
+        desc.append("Order Identifications: \n");
+        for(int i = 0; i < identifications.size(); i++) {
+            desc.append("\t" + "(" + i +  "): " + identifications.get(i)).append("\n");
+        }
+        return desc.toString();
     }
 }

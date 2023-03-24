@@ -149,7 +149,6 @@ public class ChelanOrderParty {
                 ", countryCode='" + countryCode + '\'' +
                 ", contactMechType=" + contactMechType +
                 ", contactInfo='" + contactInfo + '\'' +
-                ", role=" + role +
-                '}';
+                ", role=" + role + "}\n";
     }
 }
